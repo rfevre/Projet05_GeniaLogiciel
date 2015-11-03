@@ -1,0 +1,38 @@
+package calculatrice2;
+
+public enum Operation {
+    PLUS("+", 2), MOINS("-", 2), FOIS("*", 2), DIV("/", 2), PUISS("^", 2), SQRT("V", 1), ABS("BAS", 1) ;
+    private final String code_operation;
+    private final int nbrArgument;
+
+    Operation(String code_operation, int nbrArgument) {
+	this.code_operation = code_operation;
+	this.nbrArgument = nbrArgument;
+    }
+
+    public String toString() {
+	return this.code_operation;
+    }
+
+    public double eval(double[] operandes) {
+	
+	switch (this) {
+	case PLUS:
+	    return operandes[0]+operandes[1];
+	case MOINS :
+	    return operandes[0]-operandes[1];
+	case FOIS :
+	    return operandes[0]*operandes[1];
+	case DIV :
+	    return operandes[0]/operandes[1];
+	case PUISS :
+	    return Math.pow(operandes[0],operandes[1]);
+	case SQRT :
+	    break;
+	case ABS :
+	    break;
+	default :
+	    return 0;
+	}
+    }
+}

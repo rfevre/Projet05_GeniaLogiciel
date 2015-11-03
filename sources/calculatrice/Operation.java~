@@ -1,0 +1,10 @@
+package calculatrice;
+
+public enum Operation {
+    PLUS, MOINS, FOIS, DIV ;
+    private final String code_operation;
+
+    public Operation() {
+	
+    }
+}
