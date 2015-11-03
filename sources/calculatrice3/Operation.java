@@ -1,4 +1,5 @@
 package calculatrice3;
+import java.util.Stack;
 
 public enum Operation {
     PLUS("+",2), MOINS("-",2), FOIS("*",2), DIV("/",2), PUISS("^",2), SQRT("V", 1), ABS("ABS", 1), NOT("NOT", 1), IF("IF", 3), DROP, DUP, SWAP, COUNT ;
@@ -17,10 +18,6 @@ public enum Operation {
 
     public String toString() {
 	return this.code_operation;
-    }
-
-    public int getNbrArgument() {
-	return this.nbrArgument;
     }
 
     public double eval(double[] operandes) {
@@ -55,6 +52,38 @@ public enum Operation {
     }
 
     public void execute(Stack<Double> pile ) {
-	
+	double tmp = 0,tmp2 = 0;
+	double [] nombre;
+	if (this.nbrArgument!=0) {
+	    nombre = new double[this.nbrArgument];
+	    //On dépile le nombre de fois qu'il faut
+	    for (int i=0;i<this.nbrArgument;i++) {
+		nombre[i] = pile.pop();
+	    }
+	    tmp = this.eval(nombre);
+	    //On empile le resultat
+	    pile.push(tmp);
+	}
+	else {
+	    switch (this) {
+	    case DROP:
+	        pile.pop();
+		break;
+	    case DUP :
+		pile.push(pile.peek());
+		break;
+	    case SWAP :
+	        tmp = pile.pop();
+		tmp2 = pile.pop();
+		pile.push(tmp);
+		pile.push(tmp2);
+		break;
+	    case COUNT :
+		pile.push((double)pile.size());
+		break;
+	    default :
+	        break;
+	    }
+	}
     }
 }

@@ -18,8 +18,6 @@ public class Calculatrice {
     public double calculer(String s) {
 	StringTokenizer st = new StringTokenizer(s);
         String token;
-	double calcul=0;
-	double[] nombre = new double[10];
 
 	//On découpe la chaîne en Token
 	while (st.hasMoreTokens()) {
@@ -29,13 +27,7 @@ public class Calculatrice {
 		//On fait le calcul
 		for (Operation o: Operation.values()) {
 		    if (o.toString().equals(token)) {
-			//On dépile le nombre de fois qu'il faut
-			for (int i=0;i<o.getNbrArgument();i++) {
-			    nombre[i] = resultat.pop();
-			}
-			calcul = o.eval(nombre);
-			//On empile le resultat
-			resultat.push(calcul);  
+		        o.execute(resultat);
 		    }
 		}
 	    }
